@@ -2,7 +2,7 @@
 
 #Hierarchie
 
-*A structured display of topics from discussion surrounding the MH-370 disappearance.*
+*A structured display of topics from Hierarchical LDA.*
 
 ![ScreenShot](app/img/full.png)
 
@@ -18,7 +18,7 @@ You can view the visualization live [here](http://decisive-ui.github.io/Hierarch
 
 ### Interactivity
 
-Hierarchie updates on mouseover and zooms on click, so it's best viewed on a laptop or desktop. 
+Hierarchie updates on mouseover and zooms on click, so it's best viewed on a laptop or desktop.
 
 ### Known Issues & Suggested Improvements
 - Exposing the documents underlying topics

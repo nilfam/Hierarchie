@@ -37,43 +37,29 @@ angular.module('hierarchie.controllers', ['hierarchie.services'])
     };
 
     $scope.color = d3.scale.ordinal().range(["#33a02c", "#1f78b4", "#b2df8a", "#a6cee3", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#6a3d9a", "#cab2d6", "#ffff99"]);
-    
+
+    var fileName = new URLSearchParams(window.location.search).get('file')
+    if (fileName === undefined || fileName === null || fileName === '')
+      fileName = 'maori-all-5-levels-1-it.json';
+
+    // Other options:
+    // maori-5000-10-levels.json
+    // maori-all-3-levels-100-its.json
+    // maori-all-5-levels-1-it.json
+
+    console.log('Loading file: ' + fileName);
+
     // Load data
     $http({
       method: 'GET',
-      url: "app/data/all-mh370.json"
+      url: 'app/data/' + fileName
     }).
-    success(function(data, status, headers, config) {
-      // Do a little minipulation of the data formatting to create a valid root
-      var root = {
-        name: "MH370",
-        children: data.topic_data,
-        words: ["MH370"]
-      };
+    success(function(root, status, headers, config) {
       $scope.assignColors(root);
       $scope.data = root;
     }).
     error(function(data, status, headers, config) {
-      console.log("Error loading data!" + status);
-    });
-
-    // fcc data hack in this is gross!
-    $http({
-      method: 'GET',
-      url: "app/data/fccdata.json"
-    }).
-    success(function(data, status, headers, config) {
-      // Do a little minipulation of the data formatting to create a valid root
-      var root = {
-        name: "FCC",
-        children: data.topic_data,
-        words: ["FCC"]
-      };
-      $scope.assignColors(root);
-      $scope.fccdata = root;
-    }).
-    error(function(data, status, headers, config) {
-      console.log("Error loading data!" + status);
+      alert("Error loading data from file " + fileName + ". Possibly file not found. Request status = " + status);
     });
 
     $scope.about = function() {
@@ -107,7 +93,7 @@ angular.module('hierarchie.controllers', ['hierarchie.services'])
     };
 
     $scope.color = d3.scale.ordinal().range(["#33a02c", "#1f78b4", "#b2df8a", "#a6cee3", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#6a3d9a", "#cab2d6", "#ffff99"]);
-    
+
     // Load dats
 
     $http({
